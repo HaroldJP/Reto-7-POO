@@ -32,23 +32,9 @@ class Order:
         return total_price
 
     def __iter__(self):
-        return OrderIterator(self.items)
-
-class OrderIterator:
-    def __init__(self, items):
-        self._items = items
-        self._index = 0
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self._index < len(self._items):
-            item = self._items[self._index]
-            self._index += 1
-            return item
-        else:
-            raise StopIteration
+        # Implementing the iterable functionality
+        for item in self.items:
+            yield item
 
 if __name__ == "__main__":
 
@@ -81,6 +67,6 @@ if __name__ == "__main__":
 
     print("Order:")
     for item in order:
-        print(f"- {item.name}: ${item.price}")
+        print(f"- {item.name} ({item.kind}): ${item.price}")
 
     print(f"Total price: ${total_price}")
